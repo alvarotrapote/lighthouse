@@ -1,6 +1,7 @@
 node_modules
 dist
 dist-game
+dist-site
 game.js
 .env*
 .next

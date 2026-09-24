@@ -25,6 +25,7 @@
   },
   "type": "module",
   "scripts": {
+    "build:game": "tsc -p tsconfig.game.json",
     "dev": "vinext dev",
     "build": "vinext build",
     "start": "wrangler dev --config dist/server/wrangler.json",
