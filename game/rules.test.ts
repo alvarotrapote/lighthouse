@@ -12,3 +12,11 @@ test("the Lamp Room stays locked until the Keeper's Kitchen is visited", () => {
   const lampRoom = movePlayer(kitchen.position, "ArrowUp", kitchen.visitedKitchen);
   assert.deepEqual(lampRoom.position, { x: 0, y: 0 });
 });
+
+test("direction labels map to the same movement rules as arrow keys", () => {
+  const rocks = { x: 1 as const, y: 1 as const };
+  const kitchen = movePlayer(rocks, "ArrowLeft", false);
+  assert.deepEqual(kitchen.position, { x: 0, y: 1 });
+  const lampRoom = movePlayer(kitchen.position, "ArrowUp", kitchen.visitedKitchen);
+  assert.deepEqual(lampRoom.position, { x: 0, y: 0 });
+});

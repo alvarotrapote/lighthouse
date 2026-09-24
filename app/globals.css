@@ -12,3 +12,6 @@ h1 { margin:0 0 1rem; font-size:clamp(2.3rem,9vw,4.4rem); line-height:.95; font-
 .map-room.current { color:#211d20; background:var(--accent); font-weight:700; }
 .directions { display:flex; justify-content:space-between; gap:1rem; margin:0; color:var(--muted); font-size:.9rem; }
 .directions strong { color:var(--ink); } .message { min-height:1.5em; margin:1rem 0 .3rem; color:var(--accent); } .hint { margin:0; color:#9d9186; font-size:.82rem; }
+.controls { display:grid; grid-template-columns:repeat(2,1fr); gap:.55rem; margin-top:1.1rem; }
+.controls button { min-height:2.8rem; border:1px solid rgba(239,179,109,.5); border-radius:8px; color:var(--ink); background:rgba(239,179,109,.12); font:inherit; cursor:pointer; touch-action:manipulation; }
+.controls button:hover, .controls button:focus-visible { color:#211d20; background:var(--accent); outline:none; }
