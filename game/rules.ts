@@ -2,11 +2,11 @@ export type Position = { x: 0 | 1; y: 0 | 1 };
 export type MoveResult = { position: Position; message: string; visitedKitchen: boolean };
 
 export function isLampRoom(position: Position): boolean {
-  return position.x === 0 && position.y === 0;
+  return position.x === 1 && position.y === 0;
 }
 
 export function moveToRoom(position: Position, target: Position, visitedKitchen: boolean): MoveResult {
-  if (target.x === 0 && target.y === 0 && !visitedKitchen) return { position, message: "The lamp room door is locked.", visitedKitchen };
+  if (target.x === 1 && target.y === 0 && !visitedKitchen) return { position, message: "The lamp room door is locked.", visitedKitchen };
   const enteredKitchen = target.x === 0 && target.y === 1;
   return { position: target, message: `You enter the room.`, visitedKitchen: visitedKitchen || enteredKitchen };
 }

@@ -23,14 +23,14 @@ test("direction labels map to the same movement rules as arrow keys", () => {
 
 test("room buttons navigate directly while respecting the locked Lamp Room", () => {
   const rocks = { x: 1 as const, y: 1 as const };
-  const locked = moveToRoom(rocks, { x: 0, y: 0 }, false);
+  const locked = moveToRoom(rocks, { x: 1, y: 0 }, false);
   assert.deepEqual(locked.position, rocks);
   const kitchen = moveToRoom(rocks, { x: 0, y: 1 }, false);
-  const lampRoom = moveToRoom(kitchen.position, { x: 0, y: 0 }, kitchen.visitedKitchen);
-  assert.deepEqual(lampRoom.position, { x: 0, y: 0 });
+  const lampRoom = moveToRoom(kitchen.position, { x: 1, y: 0 }, kitchen.visitedKitchen);
+  assert.deepEqual(lampRoom.position, { x: 1, y: 0 });
 });
 
 test("only the Lamp Room receives the lamp effect", () => {
-  assert.equal(isLampRoom({ x: 0, y: 0 }), true);
+  assert.equal(isLampRoom({ x: 1, y: 0 }), true);
   assert.equal(isLampRoom({ x: 1, y: 1 }), false);
 });
