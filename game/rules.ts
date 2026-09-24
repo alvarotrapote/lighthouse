@@ -1,6 +1,12 @@
 export type Position = { x: 0 | 1; y: 0 | 1 };
 export type MoveResult = { position: Position; message: string; visitedKitchen: boolean };
 
+export function moveToRoom(position: Position, target: Position, visitedKitchen: boolean): MoveResult {
+  if (target.x === 0 && target.y === 0 && !visitedKitchen) return { position, message: "The lamp room door is locked.", visitedKitchen };
+  const enteredKitchen = target.x === 0 && target.y === 1;
+  return { position: target, message: `You enter the room.`, visitedKitchen: visitedKitchen || enteredKitchen };
+}
+
 export function movePlayer(position: Position, key: string, visitedKitchen: boolean): MoveResult {
   const moves: Record<string, { direction: string; dx: -1 | 0 | 1; dy: -1 | 0 | 1 }> = {
     ArrowUp: { direction: "north", dx: 0, dy: -1 }, ArrowRight: { direction: "east", dx: 1, dy: 0 },
