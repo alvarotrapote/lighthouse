@@ -8,4 +8,5 @@ game.js
 next-env.d.ts
 /dist/
 .vinext/
+.open-next/
 .wrangler/

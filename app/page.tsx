@@ -1,15 +1,6 @@
-export default function Home() {
-  return (
-    <main className="grid min-h-screen place-items-center bg-gradient-to-br from-blue-700 via-blue-600 to-cyan-500 px-6 text-white">
-      <section className="w-full max-w-lg rounded-3xl border border-white/20 bg-white/10 p-10 text-center shadow-2xl backdrop-blur-sm">
-        <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-blue-100">
-          design + AI
-        </p>
-        <h1 className="text-5xl font-semibold tracking-tight sm:text-6xl">Hello, world!</h1>
-        <p className="mt-5 text-lg leading-8 text-blue-50">
-          A small first step, ready to grow into something useful.
-        </p>
-      </section>
-    </main>
-  );
-}
+"use client";
+import { useEffect, useState } from "react";
+type Position = { x: 0 | 1; y: 0 | 1 };
+const rooms = [[{ name: "Spiral Stair", image: "/rooms/spiral-stair.png", description: "A narrow iron staircase curls upward through the lighthouse. Salt air slips through the seams, carrying the distant pulse of the sea." }, { name: "Lamp Room", image: "/rooms/lamp-room.png", description: "The great Fresnel lens waits in its brass housing, catching the last light of day. Beyond the glass, the horizon is turning violet." }], [{ name: "Keeper's Kitchen", image: "/rooms/keepers-kitchen.png", description: "A small cast-iron stove warms the kitchen, and a kettle hums beside a loaf of bread. Copper pans glow softly in the lantern light." }, { name: "Rocks", image: "/rooms/rocks.png", description: "Jagged rocks shine beneath the lighthouse, slick with spray and seaweed. Waves break below, leaving the air bright with salt." }]] as const;
+const moves: Record<string, { direction: string; dx: -1 | 0 | 1; dy: -1 | 0 | 1 }> = { ArrowUp: { direction: "north", dx: 0, dy: -1 }, ArrowRight: { direction: "east", dx: 1, dy: 0 }, ArrowDown: { direction: "south", dx: 0, dy: 1 }, ArrowLeft: { direction: "west", dx: -1, dy: 0 } };
+export default function Home() { const [position, setPosition] = useState<Position>({ x: 1, y: 1 }); const [message, setMessage] = useState("The lighthouse waits above you."); const room = rooms[position.y][position.x]; useEffect(() => { const onKeyDown = (event: KeyboardEvent) => { const move = moves[event.key]; if (!move) return; event.preventDefault(); const nextX = position.x + move.dx; const nextY = position.y + move.dy; if (nextX < 0 || nextX > 1 || nextY < 0 || nextY > 1) { setMessage(`You cannot go ${move.direction}; the sea and cliff face block the way.`); return; } setPosition({ x: nextX as 0 | 1, y: nextY as 0 | 1 }); setMessage(`You head ${move.direction}.`); }; window.addEventListener("keydown", onKeyDown); return () => window.removeEventListener("keydown", onKeyDown); }, [position]); return <main className="shell"><section className="card" aria-live="polite"><p className="eyebrow">A tiny lighthouse adventure</p><h1>{room.name}</h1><img className="room-image" src={room.image} alt={`Illustration of ${room.name}`} /><p className="description">{room.description}</p><div className="map" aria-label="Lighthouse map">{rooms.flat().map((mapRoom, index) => { const x = (index % 2) as 0 | 1; const y = Math.floor(index / 2) as 0 | 1; const current = x === position.x && y === position.y; return <div key={mapRoom.name} className={`map-room${current ? " current" : ""}`} aria-current={current ? "location" : undefined}>{mapRoom.name}</div>; })}</div><p className="directions"><strong>Exits</strong><span>North · East · South · West</span></p><p className="message">{message}</p><p className="hint">Use the arrow keys to explore.</p></section></main>; }
