@@ -1,4 +1,7 @@
 node_modules
+dist
+dist-game
+game.js
 .env*
 .next
 next-env.d.ts

@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Lighthouse</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: Georgia, "Times New Roman", serif;
+        background: #071521;
+        color: #eef6f8;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background:
+          radial-gradient(circle at 70% 18%, rgba(255, 224, 138, 0.16), transparent 18rem),
+          linear-gradient(155deg, #102d3e 0%, #071521 60%, #03090e 100%);
+      }
+
+      main {
+        width: min(680px, 100%);
+        border: 1px solid rgba(220, 238, 241, 0.2);
+        border-radius: 20px;
+        padding: clamp(28px, 6vw, 56px);
+        background: rgba(6, 20, 30, 0.82);
+        box-shadow: 0 28px 80px rgba(0, 0, 0, 0.45);
+      }
+
+      .eyebrow {
+        margin: 0 0 12px;
+        color: #f4cf74;
+        font: 700 0.75rem/1.2 system-ui, sans-serif;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.5rem, 8vw, 5rem);
+        font-weight: 500;
+        line-height: 0.95;
+      }
+
+      #description {
+        margin: 28px 0;
+        color: #cbdce0;
+        font-size: 1.1rem;
+        line-height: 1.65;
+      }
+
+      #room-image {
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        margin-top: 28px;
+        border: 1px solid rgba(220, 238, 241, 0.22);
+        border-radius: 14px;
+        object-fit: cover;
+        box-shadow: 0 14px 32px rgba(0, 0, 0, 0.28);
+      }
+
+      .map {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+        width: min(280px, 100%);
+        margin-top: 28px;
+        font: 600 0.72rem/1.2 system-ui, sans-serif;
+        letter-spacing: 0.03em;
+      }
+
+      .map-room {
+        min-height: 58px;
+        display: grid;
+        place-items: center;
+        padding: 8px;
+        border: 1px solid rgba(220, 238, 241, 0.2);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.06);
+        color: #b4c9cf;
+        text-align: center;
+      }
+
+      .map-room.current {
+        border-color: #f4cf74;
+        background: rgba(244, 207, 116, 0.2);
+        color: #fff4cf;
+        box-shadow: inset 0 0 0 1px rgba(244, 207, 116, 0.22);
+      }
+
+      .directions {
+        padding-top: 22px;
+        border-top: 1px solid rgba(220, 238, 241, 0.14);
+        font-family: system-ui, sans-serif;
+      }
+
+      .directions p { margin: 0 0 10px; }
+
+      #exits { color: #f4cf74; font-weight: 700; }
+
+      #message {
+        min-height: 1.5em;
+        margin-top: 18px;
+        color: #ffb9a9;
+        font: 600 0.95rem/1.5 system-ui, sans-serif;
+      }
+
+      kbd {
+        display: inline-block;
+        min-width: 1.8rem;
+        padding: 3px 7px;
+        border: 1px solid #607987;
+        border-bottom-width: 3px;
+        border-radius: 6px;
+        background: #173242;
+        color: white;
+        font: 600 0.8rem system-ui, sans-serif;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <main aria-live="polite">
+      <p class="eyebrow">The lighthouse</p>
+      <h1 id="room-name"></h1>
+      <section class="map" aria-label="Lighthouse map">
+        <div class="map-room" data-x="0" data-y="0">Spiral Stair</div>
+        <div class="map-room" data-x="1" data-y="0">Lamp Room</div>
+        <div class="map-room" data-x="0" data-y="1">Keeper's Kitchen</div>
+        <div class="map-room" data-x="1" data-y="1">Rocks</div>
+      </section>
+      <img id="room-image" alt="" />
+      <p id="description"></p>
+      <section class="directions" aria-label="Movement instructions">
+        <p>You can go: <span id="exits"></span></p>
+        <p>Move with <kbd>↑</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd></p>
+        <p id="message" role="status"></p>
+      </section>
+    </main>
+    <script src="dist-game/game.js" defer></script>
+  </body>
+</html>
