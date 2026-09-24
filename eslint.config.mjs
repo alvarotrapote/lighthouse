@@ -15,6 +15,8 @@ const eslintConfig = defineConfig([
     "dist/**",
     "dist-game/**",
     "dist-site/**",
+    ".open-next/**",
+    ".wrangler/**",
   ]),
 ]);
 
