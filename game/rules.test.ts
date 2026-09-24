@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { movePlayer } from "./rules";
+import { movePlayer } from "./rules.ts";
 
 test("the Lamp Room stays locked until the Keeper's Kitchen is visited", () => {
   const rocks = { x: 1 as const, y: 1 as const };
